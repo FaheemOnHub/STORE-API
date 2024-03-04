@@ -1,9 +1,20 @@
+const Product = require("./../models/product");
 const getAllProductsStatic = async (req, res) => {
-  res.status(200).json({ message: "Product fetch testing" });
+  const product = await Product.find();
+  res.status(200).json({
+    product,
+    nbHits: product.length,
+  });
 };
 
 const getAllProducts = async (req, res) => {
-  res.status(200).json({ message: "Product route" });
+  const product = await Product.find(req.query);
+  res.status(200).json({
+    message: "Success",
+    product,
+    nbHits: product.length,
+  });
+
   throw new Error("Testing error");
 };
 
